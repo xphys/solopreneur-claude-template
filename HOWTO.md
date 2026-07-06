@@ -50,6 +50,8 @@ Address them naturally; each works in its own folder and reports via tickets:
 
 `/model` sets the manager tier; workers follow one tier below automatically (Fable→Opus,
 Opus→Sonnet). Drop a tier for routine work; use the top tier for payments/auth/cross-repo work.
+Override workers any time in plain words ("use opus workers for this") — your word beats the
+ladder. Only limit: workers never run above the manager (reviewer must be ≥ author).
 
 ## 5. What protects you (don't fight these)
 
