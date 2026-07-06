@@ -35,8 +35,10 @@ asking — interview only for what code can't tell.
 
 ## 3. Apply
 
-- Fill every placeholder across: `CLAUDE.md`, `apps.yaml`, `docs/*.md`, `docs/data/README.md`,
-  `infra/**`, `tester/README.md`, `growth/README.md`. Placeholders of the form
+- Fill every placeholder across: `CLAUDE.md`, `apps.yaml`, `docs/*.md` (incl.
+  `environments.md` — the env×app URL matrix), `docs/data/README.md`, `infra/**`,
+  `tester/README.md`, `growth/README.md`. Create `docs/conventions.md` sections from the real
+  stack (API envelope, auth, error handling…), each with one exemplar link. Placeholders of the form
   `{{NAME:default}}` — use the default unless the owner overrides.
 - Trim/extend `apps.yaml` to the real apps; keep its strict format (setup.sh parses it).
   Mirror any app add/remove in `apps/` folders and `docs/codebases/`.

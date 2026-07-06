@@ -32,17 +32,10 @@ ignore them.
 ## How the owner works (the daily loop)
 
 **Chat-first.** The owner opens this project and asks or commands in plain language. You do the
-work, then **record it yourself**. **Respond short:** the owner is an experienced developer —
-minimal answers, no background explanation unless asked for detail.
-
-1. Read the relevant docs (order below), scope which app repos are touched, implement.
-2. When a work item is done, write a ticket into `docs/tickets/open/` from
-   [docs/tickets/TEMPLATE.md](docs/tickets/TEMPLATE.md) — request as understood, what changed,
-   any DDL/infra applied, and **click-through verification steps** — set `Status: In review`.
-   The `/ticket` skill does this. Trivial changes (typos, doc tweaks) don't need a ticket.
-3. The owner verifies from the ticket alone and confirms; then move it to `docs/tickets/done/`.
-4. If a request is ambiguous, **don't guess** — ask in chat, or set `Status: Need more info`
-   with your questions in the ticket if working async.
+work, then **record it yourself** as a ticket the owner verifies without reading code
+(`/ticket` skill; full lifecycle: [docs/tickets/README.md](docs/tickets/README.md)).
+Ambiguous request → **don't guess**, ask. **Respond short:** the owner is an experienced
+developer — minimal answers, no background explanation unless asked for detail.
 
 ## Multi-agent execution (manager–worker)
 
@@ -56,26 +49,15 @@ never commit. Trivial fixes skip the loop; mechanical bulk work uses the cheapes
 
 ## Read order for any task
 
-1. [docs/README.md](docs/README.md) — documentation index.
-2. [docs/overview.md](docs/overview.md) — how the apps fit together.
-3. [docs/dev-workflow.md](docs/dev-workflow.md) — branching, deploy, ticket flow.
-4. The relevant [docs/codebases/](docs/codebases/) doc — structure + "how to add a feature".
-5. [docs/gotchas.md](docs/gotchas.md) before changing anything; [docs/data/](docs/data/README.md)
-   for schema; [docs/conventions.md](docs/conventions.md) for patterns.
+Start at [docs/README.md](docs/README.md) — it is the index and defines the read order.
+Minimum before touching code: overview → dev-workflow → the app's codebase doc → gotchas.
 
 ## Golden rules
 
-1. **Branch model: `features/*` → `main` → `deploy/uat` → `deploy/prod`.** Branches per app
-   are declared in [apps.yaml](apps.yaml).
-   - **Develop on `features/<slug>`** off `main` (one branch per work-item; trivial fixes —
-     typos, doc-only — may land on `main` directly). When done, **squash-merge back to
-     `main`** (one work-item = one commit on `main`, revertable as a unit) and **delete the
-     branch immediately** — local and remote. Never leave merged `features/*` around; if
-     `/status` finds stale ones, that's a bug to clean up.
-   - **Never push to a deployment branch** (`deploy/uat`, `deploy/prod` — both protected;
-     pushing auto-deploys). Only the owner promotes: `main` → `deploy/uat` for verification,
-     then `deploy/uat` → `deploy/prod` to release.
-   - Roll back `main` with `git revert <commit>`, never `git reset --hard` on a pushed branch.
+1. **Branch model: `features/<slug>` → `main` → `deploy/uat` → `deploy/prod`.** Develop on a
+   short-lived `features/*`, squash-merge to `main`, **delete the branch immediately**.
+   **Never push to `deploy/*`** — promotion is owner-triggered only (`/promote` skill).
+   Full rules + diagram: [docs/dev-workflow.md](docs/dev-workflow.md).
 2. **Infrastructure is code.** No cloud resource exists unless it is in `infra/iac/`. Manual
    console changes are emergencies only and must be back-ported to IaC (and ticketed) the same
    day. Plan → owner approves → apply.

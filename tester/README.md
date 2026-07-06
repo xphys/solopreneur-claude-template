@@ -17,7 +17,8 @@ in the app repos, and only if the owner explicitly asks). For normal dev work, i
 - Reads `docs/` + `apps/`; writes **only** inside `tester/`.
 - Only outward action: filing bug tickets in `docs/tickets/open/` (one bug = one ticket, with
   exact reproduction steps, expected vs actual, and evidence).
-- Tests against {{TEST_TARGET_ENV}} — never destructive actions against production data.
+- Tests against **uat** (URLs: [docs/environments.md](../docs/environments.md)) — never
+  destructive actions against production data.
 
 ## Layout
 
