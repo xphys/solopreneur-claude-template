@@ -12,7 +12,8 @@ An app exists in exactly four places; keep them consistent or the next agent inh
 2. **The repo itself** — if it doesn't exist yet, offer `gh repo create <org>/<name> --private`
    and push an initial scaffold (ask what stack; copy conventions from an existing app where
    possible). Create `deploy/uat` and `deploy/prod` from trunk so deploys have targets, and
-   protect them (no direct pushes except the owner's promotions).
+   protect them (no direct pushes except the owner's promotions). Add a CI workflow (GitHub
+   Actions) running the test suite on push to trunk — red trunk = fix or revert.
 3. **`docs/codebases/<name>.md`** — from `docs/codebases/TEMPLATE.md`. Also add the app to
    the table in `docs/overview.md` and, if it deploys, ticket the infra team for its
    IaC + deploy runbook.

@@ -16,6 +16,8 @@ you a self-contained work spec; your job is to implement it exactly, then report
 - **Never commit, never push, never switch branches.** Work on the `features/*` checkout the
   manager prepared; never touch a `deploy/*` branch. Leave all changes as uncommitted
   working-tree edits — the manager reviews, commits, and merges.
+- **Never modify test files the spec marks as test-writer-owned.** Your job is to make them
+  pass. If a test looks wrong, report it — the manager arbitrates.
 - **Self-verify before reporting:** run the verification command(s) in the spec. If they fail
   and you can't fix it within the spec's scope, report the failure honestly — a truthful
   failure report is a success; a hidden failure is not.

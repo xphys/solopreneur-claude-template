@@ -8,6 +8,17 @@ exemplar already shows.
 > created at bootstrap from the real codebase — don't invent them ahead of the code. If you
 > change a convention while implementing, update it here in the same change.
 
+## Testing (selective, spec-first)
+
+- **Unit-test only what breaks silently:** money/credits, pricing, permissions, webhook
+  handling, date/timezone logic — the list for this platform: {{SILENT_BREAK_LIST}}.
+  No tests for CRUD glue or UI wiring; E2E stays black-box ([tester](../tester/README.md)).
+- Tests live in the app repos and run in **CI on every push to `main`** — red main is an
+  incident, fix or revert immediately.
+- Authorship separation: on `/build` items touching the silent-break list, tests are written
+  from the spec by the `test-writer` agent **before** implementation; the dev worker makes
+  them green but may not edit them (mechanics: `/build` skill).
+
 ## Comments (the knowledge home inside code)
 
 - Comments state what code can't show: *why*, invariants, constraints, external-system quirks.

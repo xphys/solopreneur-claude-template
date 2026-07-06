@@ -44,12 +44,21 @@ independently implementable and revertable (one item = one commit). For each ite
 - **Constraints** — stay in repo X; no commits; no schema/infra changes unless spec'd; what
   is explicitly OUT of scope.
 
+Mark items touching the silent-break list (`docs/conventions.md` → Testing) as **test-first**.
+
 ## 2. Dispatch
 
 Per item, first create its branch in the target repo: `git -C apps/<name> checkout -b
-features/<ticket-slug>` off up-to-date `main`. Then spawn one `worker` subagent (Agent tool,
-`subagent_type: worker`, `model` from the ladder above — always set it explicitly); the worker
-edits on that checkout and never switches branches. Independent items → dispatch in parallel;
+features/<ticket-slug>` off up-to-date `main`.
+
+**Test-first items:** dispatch `test-writer` first (subagent_type: `test-writer`, same model
+ladder) with the spec ONLY. Review its tests against the acceptance criteria (are they honest?
+complete?), note the test file paths, then dispatch the dev worker with the spec + "tests at
+<paths> must pass; you may NOT modify them."
+
+Then spawn one `worker` subagent (Agent tool, `subagent_type: worker`, `model` from the
+ladder above — always set it explicitly); the worker edits on that checkout and never
+switches branches. Independent items → dispatch in parallel;
 items touching the same repo → sequential (one checkout), or use worktree isolation.
 Mechanical bulk items (renames, repeated edits) use the bulk tier — same spec bar, cheaper hands.
 
@@ -61,7 +70,8 @@ When a worker reports back:
 2. **Read the actual diff** (`git -C apps/<name> diff`) against the acceptance criteria and
    conventions. Check the worker's "Notes for review" risks specifically.
 3. Watch for the classic worker failure modes: scope creep, convention drift, deleted code it
-   didn't understand, tests weakened to pass.
+   didn't understand, tests weakened to pass. Test-first items: `git diff -- <test paths>`
+   must be empty after the dev worker — any edit to test-writer files is an automatic fail.
 
 ## 4. Loop
 

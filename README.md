@@ -42,7 +42,7 @@ edit `apps.yaml`, then run `./setup.sh`.
 | [office/](office/README.md) | AI back-office team — finance reports, invoices, legal |
 | [docs/routines.md](docs/routines.md) | Standing scheduled agents (nightly QA, weekly audit/report…) |
 | `.claude/skills/` | Workflow skills: `/bootstrap`, `/build`, `/ticket`, `/status`, `/promote`, `/new-app`, `/routines` |
-| `.claude/agents/` | Subagent roles: `worker` (implementer for the `/build` loop; model set by the ladder) |
+| `.claude/agents/` | Subagent roles: `worker` (implementer) + `test-writer` (spec-only test author) for `/build` |
 
 ## Principles
 
