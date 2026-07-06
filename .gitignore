@@ -1,0 +1,23 @@
+# App repos are mounted under apps/ — each has its own git; never vendored here.
+apps/*
+!apps/README.md
+
+# Secrets & env — never in git (see docs/security.md)
+.env
+.env.*
+*.pem
+*.key
+*-service-account*.json
+
+# Terraform local state — remote state only (see infra/iac/README.md)
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.auto.tfvars.example
+
+# OS / editor / tool noise
+.DS_Store
+node_modules/
+__pycache__/
+scratch/
