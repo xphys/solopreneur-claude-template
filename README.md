@@ -27,6 +27,7 @@ edit `apps.yaml`, then run `./setup.sh`.
 
 | Path | What it is |
 |---|---|
+| [HOWTO.md](HOWTO.md) | **The owner's manual — start here** |
 | [CLAUDE.md](CLAUDE.md) | The AI's operating manual — golden rules, read order, workflow |
 | [apps.yaml](apps.yaml) | Registry of app repos + branch model (source of truth) |
 | [setup.sh](setup.sh) | Clones/updates all app repos into `apps/` |
