@@ -1,0 +1,58 @@
+---
+name: build
+description: Manager–worker implementation loop — plan the work, dispatch Opus worker subagents with self-contained specs, verify and review their diffs, loop fixes until acceptance criteria pass, then commit and ticket. Use for medium/large implementation tasks; do trivial fixes directly without this.
+---
+
+# /build — the manager–worker loop
+
+You (main session, Fable) are the **manager**: you plan, dispatch, verify, review, and land.
+The **worker** agent (`.claude/agents/worker.md`, Opus) implements. You never trust — you check.
+
+## 0. Size gate
+
+Trivial/small (one file, obvious change, < ~15 min of work): **do it yourself directly** —
+dispatch overhead isn't worth it. Delegate medium/large items only.
+
+## 1. Plan
+
+Read the docs (CLAUDE.md read order) and decompose the request into work-items, each
+independently implementable and revertable (one item = one commit). For each item write a
+**self-contained spec** — the worker sees nothing else, so it must contain:
+
+- **Goal** — what exists after, in one paragraph.
+- **Acceptance criteria** — checkable statements you will verify against, not vibes.
+- **Where** — repo (`apps/<name>`), the areas/files involved, one exemplar file to copy.
+- **Read first** — links: `docs/conventions.md`, `docs/codebases/<app>.md`, relevant gotchas.
+- **Verify with** — exact command(s): build, tests, curl, or run steps.
+- **Constraints** — stay in repo X; no commits; no schema/infra changes unless spec'd; what
+  is explicitly OUT of scope.
+
+## 2. Dispatch
+
+Spawn one `worker` subagent per item (Agent tool, `subagent_type: worker`). Independent items
+→ dispatch in parallel; items touching the same repo in conflicting ways → sequential, or use
+worktree isolation. Mechanical bulk items (renames, repeated edits) may use `model: haiku` or
+`model: sonnet` instead — same spec bar, cheaper hands.
+
+## 3. Verify, then review
+
+When a worker reports back:
+
+1. **Run the verification yourself.** The report's claims don't count; only what you observe.
+2. **Read the actual diff** (`git -C apps/<name> diff`) against the acceptance criteria and
+   conventions. Check the worker's "Notes for review" risks specifically.
+3. Watch for the classic worker failure modes: scope creep, convention drift, deleted code it
+   didn't understand, tests weakened to pass.
+
+## 4. Loop
+
+On failure, write a **fix plan** — what is wrong (observed, with output), what was expected,
+where to look — and send it to the **same worker** via SendMessage (it keeps its context).
+**Max 3 rounds per item.** Three failures means the spec is wrong or the item is bigger than
+planned: stop, revert the working tree if it's a mess, and escalate to the owner via a
+`Status: Blocked` ticket with what you learned.
+
+## 5. Land
+
+Per passing item: commit in the app repo (one item = one commit, ticket id in the message),
+then record via `/ticket`. Multi-item builds get one ticket per coherent item, cross-linked.

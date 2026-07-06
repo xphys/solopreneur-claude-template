@@ -38,7 +38,8 @@ edit `apps.yaml`, then run `./setup.sh`.
 | [design/](design/README.md) | AI design team — mockups, tokens, UX decisions |
 | [growth/](growth/README.md) | AI growth team — copy, SEO, analytics |
 | [security/](security/README.md) | AI security team — audits, dependency & secret hygiene |
-| `.claude/skills/` | Workflow skills: `/bootstrap`, `/ticket`, `/status`, `/new-app` |
+| `.claude/skills/` | Workflow skills: `/bootstrap`, `/build`, `/ticket`, `/status`, `/new-app` |
+| `.claude/agents/` | Subagent roles: `worker` (Opus implementer for the `/build` loop) |
 
 ## Principles
 
@@ -48,3 +49,6 @@ edit `apps.yaml`, then run `./setup.sh`.
 - **Infrastructure is code.** Nothing exists in the cloud unless it's in `infra/iac/`.
 - **Trunk-based.** Work lands on each app's trunk; production branches are deploy-only and
   promoted manually by the owner.
+- **Manager–worker execution.** The strongest model (Fable) plans, reviews, and holds the
+  quality bar; Opus workers implement from self-contained specs; the loop repeats until
+  acceptance criteria pass. See `/build`.

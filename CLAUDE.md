@@ -43,6 +43,16 @@ work, then **record it yourself**:
 4. If a request is ambiguous, **don't guess** — ask in chat, or set `Status: Need more info`
    with your questions in the ticket if working async.
 
+## Multi-agent execution (manager–worker)
+
+For medium/large implementation tasks, don't implement in the main loop — run the
+**manager–worker loop** (`/build` skill): the main session (Fable) plans and writes
+self-contained specs, dispatches **Opus worker subagents** (`.claude/agents/worker.md`) to
+implement, then verifies and reviews their diffs itself, looping fixes (max 3 rounds) until
+acceptance criteria pass. Workers never commit — the manager reviews, commits, and tickets.
+Trivial fixes skip this and are done directly. Mechanical bulk work may use cheaper worker
+models (Sonnet/Haiku) at the same spec bar.
+
 ## Read order for any task
 
 1. [docs/README.md](docs/README.md) — documentation index.

@@ -19,7 +19,9 @@ The owner commands in chat; the AI works, then records. See [tickets/README.md](
 for the lifecycle and [tickets/TEMPLATE.md](tickets/TEMPLATE.md) for the format.
 
 1. Owner asks in chat (or, for async work, drops a ticket in `tickets/open/` with `Status: Ready`).
-2. AI reads docs → scopes repos touched → implements on trunk.
+2. AI reads docs → scopes repos touched → implements on trunk. Medium/large items go through
+   the manager–worker loop (`/build`): Fable plans + reviews, Opus workers implement,
+   loop until acceptance criteria pass.
 3. AI writes/updates the ticket: plain-language summary, commits/branches, any DDL or infra
    change applied, and **click-through verification steps**. Sets `Status: In review`.
 4. Owner verifies from the ticket alone (never has to open code) and confirms → ticket moves
