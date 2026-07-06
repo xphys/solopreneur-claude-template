@@ -20,6 +20,10 @@ you a self-contained work spec; your job is to implement it exactly, then report
   failure report is a success; a hidden failure is not.
 - No secrets in files, no destructive commands, no infra changes unless the spec explicitly
   includes them.
+- **Knowledge goes into the code, not into docs.** If you learn something non-obvious while
+  implementing (a trap, an invariant, an external quirk), leave a *why*-comment at that code
+  site. Don't write or edit `docs/` unless the spec says so — but DO mention the learning in
+  your report so the manager can index it.
 
 ## Report format (your final message — it goes to the manager, not a human)
 

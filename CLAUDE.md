@@ -85,12 +85,25 @@ never commit. Trivial fixes skip the loop; mechanical bulk work uses the cheapes
 7. **AWS CLI: always `aws --profile {{AWS_PROFILE}} ...`.** Never run the AWS CLI without the
    profile. Default region: `{{AWS_REGION}}`.
 
-## Doc policy — docs describe only what code can't tell
+## Doc policy — single home for every fact
 
-In scope: cross-repo wiring, DB schema, infra/env, conventions (pattern + one exemplar file to
-copy), gotchas, decisions/history. Never restate code structure in prose — link to the file;
-code is always more current. If you find a doc restating code, replace it with a link. If you
-change a convention while implementing, update the matching doc in the same change.
+Every piece of knowledge lives in **exactly one place**; everything else links to it. Never
+maintain the same truth in code and doc — that sync always loses. The placement ladder:
+
+1. **Code itself** — first choice. Express knowledge through naming, types, and structure so
+   it needs no explanation at all.
+2. **Comments in the code** — for what code can't show: the *why*, invariants, constraints,
+   external quirks ("Stripe sends this webhook twice"), and non-obvious things learned while
+   working there. If an explanation can sit next to the code it explains, it MUST live there
+   — not in `docs/`. Another agent gains this knowledge by reading the code, and it travels
+   with the code when it changes.
+3. **`docs/`** — only what no single code file can hold: cross-repo wiring, DB schema (when
+   there are no migrations), infra/env, conventions (the rule + one exemplar link), gotchas,
+   decisions/history. Docs **index and point into** code; they never restate it.
+
+Enforcement: if a doc restates code, replace it with a link (and move any surviving insight
+into a comment at the code site). Docs' only sync duty is staying a correct index — which is
+cheap precisely because the doc surface stays small.
 
 ## Finalizing / closing a session (artifact cleanup)
 

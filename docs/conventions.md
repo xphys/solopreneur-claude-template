@@ -22,6 +22,15 @@ exemplar file to copy — never paste long code into this doc.
 
 {{NAMING_CONVENTION}}
 
+## Comments (the knowledge home inside code)
+
+- Comments state what code can't show: *why*, invariants, constraints, external-system quirks.
+  Never narrate what the next line does.
+- Learned something non-obvious while working in a file (a trap, a hidden coupling, a reason
+  something looks wrong but isn't)? Leave it as a comment **at that site** before moving on —
+  that's where the next agent will look. Platform-wide traps go to [gotchas.md](gotchas.md)
+  instead; never both.
+
 ## Commits
 
 - One work-item = one commit on trunk (revertable as a unit).

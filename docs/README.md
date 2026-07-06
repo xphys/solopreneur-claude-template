@@ -12,5 +12,9 @@ The source of truth for the platform. Read in this order for any task:
 8. [decisions/](decisions/README.md) — ADRs: why things are the way they are.
 9. [tickets/](tickets/README.md) — the work log.
 
-Editing rules: keep links relative (`codebases/*` link to code as `../../apps/<app>/...`);
-docs describe only what code can't tell — link to code instead of restating it.
+Editing rules: keep links relative (`codebases/*` link to code as `../../apps/<app>/...`).
+**Single-home policy** (see CLAUDE.md): knowledge lives in code first, code comments second,
+docs last — docs hold only what no single code file can (wiring, schema, infra, conventions,
+gotchas, decisions) and otherwise index into code, never restate it. Before writing a doc
+paragraph, ask: could this be a comment at the code site instead? If yes, put it there and
+link.
