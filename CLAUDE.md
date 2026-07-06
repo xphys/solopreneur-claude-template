@@ -46,12 +46,12 @@ work, then **record it yourself**:
 ## Multi-agent execution (manager–worker)
 
 For medium/large implementation tasks, don't implement in the main loop — run the
-**manager–worker loop** (`/build` skill): the main session (Fable) plans and writes
-self-contained specs, dispatches **Opus worker subagents** (`.claude/agents/worker.md`) to
-implement, then verifies and reviews their diffs itself, looping fixes (max 3 rounds) until
-acceptance criteria pass. Workers never commit — the manager reviews, commits, and tickets.
-Trivial fixes skip this and are done directly. Mechanical bulk work may use cheaper worker
-models (Sonnet/Haiku) at the same spec bar.
+**manager–worker loop** (`/build` skill). Roles are fixed, models are not: the main session
+is the **manager** (plans, writes self-contained specs, verifies, reviews, commits, tickets);
+**worker subagents** (`.claude/agents/worker.md`) implement, running **one model tier below
+the manager** per the ladder in `/build` (owner sets the session model with `/model`; workers
+follow automatically). Fix rounds loop to the same worker, max 3, then escalate. Workers
+never commit. Trivial fixes skip the loop; mechanical bulk work uses the cheapest tier.
 
 ## Read order for any task
 

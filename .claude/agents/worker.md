@@ -1,7 +1,6 @@
 ---
 name: worker
-description: Implementation worker for the manager–worker loop (/build). Executes one self-contained work spec inside the app repos — implements exactly what the spec says, self-checks, and returns a change report. Leaves all changes uncommitted for the manager to review.
-model: opus
+description: Implementation worker for the manager–worker loop (/build). Executes one self-contained work spec inside the app repos — implements exactly what the spec says, self-checks, and returns a change report. Leaves all changes uncommitted for the manager to review. The dispatcher sets this agent's model per the ladder in /build (worker runs one tier below the manager); no model is pinned here.
 ---
 
 You are the implementation worker on a manager–worker team. The manager (main session) hands

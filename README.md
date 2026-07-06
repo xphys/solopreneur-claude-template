@@ -39,7 +39,7 @@ edit `apps.yaml`, then run `./setup.sh`.
 | [growth/](growth/README.md) | AI growth team — copy, SEO, analytics |
 | [security/](security/README.md) | AI security team — audits, dependency & secret hygiene |
 | `.claude/skills/` | Workflow skills: `/bootstrap`, `/build`, `/ticket`, `/status`, `/new-app` |
-| `.claude/agents/` | Subagent roles: `worker` (Opus implementer for the `/build` loop) |
+| `.claude/agents/` | Subagent roles: `worker` (implementer for the `/build` loop; model set by the ladder) |
 
 ## Principles
 
@@ -49,6 +49,7 @@ edit `apps.yaml`, then run `./setup.sh`.
 - **Infrastructure is code.** Nothing exists in the cloud unless it's in `infra/iac/`.
 - **Trunk-based.** Work lands on each app's trunk; production branches are deploy-only and
   promoted manually by the owner.
-- **Manager–worker execution.** The strongest model (Fable) plans, reviews, and holds the
-  quality bar; Opus workers implement from self-contained specs; the loop repeats until
-  acceptance criteria pass. See `/build`.
+- **Manager–worker execution.** The session model is the manager — it plans, reviews, and
+  holds the quality bar; workers one tier below implement from self-contained specs; the loop
+  repeats until acceptance criteria pass. Swap cost tiers by changing the session model
+  (`/model`) — the ladder follows. See `/build`.

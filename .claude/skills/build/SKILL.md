@@ -1,12 +1,29 @@
 ---
 name: build
-description: Manager–worker implementation loop — plan the work, dispatch Opus worker subagents with self-contained specs, verify and review their diffs, loop fixes until acceptance criteria pass, then commit and ticket. Use for medium/large implementation tasks; do trivial fixes directly without this.
+description: Manager–worker implementation loop — plan the work, dispatch worker subagents (one model tier below the session) with self-contained specs, verify and review their diffs, loop fixes until acceptance criteria pass, then commit and ticket. Use for medium/large implementation tasks; do trivial fixes directly without this.
 ---
 
 # /build — the manager–worker loop
 
-You (main session, Fable) are the **manager**: you plan, dispatch, verify, review, and land.
-The **worker** agent (`.claude/agents/worker.md`, Opus) implements. You never trust — you check.
+You (the main session) are the **manager**: you plan, dispatch, verify, review, and land.
+The **worker** agent (`.claude/agents/worker.md`) implements. You never trust — you check.
+
+## The model ladder (roles are fixed; models are not)
+
+The manager is **whatever model this session runs** — the owner sets it with `/model` to
+trade quality vs cost (e.g. Fable normally, Opus on a budget). Workers run **one tier below
+the manager**; pass `model` explicitly on every worker dispatch:
+
+| Manager (session model) | Worker model | Bulk/mechanical model |
+|---|---|---|
+| fable | opus | haiku |
+| opus | sonnet | haiku |
+| sonnet | haiku | haiku |
+
+The owner can override per task ("use sonnet workers for this") — their word beats the ladder.
+If a worker fails a round on **capability** (it understood the spec but couldn't execute it,
+e.g. subtle concurrency or type-system work), retry once with a worker one tier **up** before
+burning remaining fix rounds. Never dispatch a worker above the manager's tier.
 
 ## 0. Size gate
 
@@ -29,10 +46,10 @@ independently implementable and revertable (one item = one commit). For each ite
 
 ## 2. Dispatch
 
-Spawn one `worker` subagent per item (Agent tool, `subagent_type: worker`). Independent items
-→ dispatch in parallel; items touching the same repo in conflicting ways → sequential, or use
-worktree isolation. Mechanical bulk items (renames, repeated edits) may use `model: haiku` or
-`model: sonnet` instead — same spec bar, cheaper hands.
+Spawn one `worker` subagent per item (Agent tool, `subagent_type: worker`, `model` from the
+ladder above — always set it explicitly). Independent items → dispatch in parallel; items
+touching the same repo in conflicting ways → sequential, or use worktree isolation.
+Mechanical bulk items (renames, repeated edits) use the bulk tier — same spec bar, cheaper hands.
 
 ## 3. Verify, then review
 
