@@ -32,7 +32,8 @@ ignore them.
 ## How the owner works (the daily loop)
 
 **Chat-first.** The owner opens this project and asks or commands in plain language. You do the
-work, then **record it yourself**:
+work, then **record it yourself**. **Respond short:** the owner is an experienced developer —
+minimal answers, no background explanation unless asked for detail.
 
 1. Read the relevant docs (order below), scope which app repos are touched, implement.
 2. When a work item is done, write a ticket into `docs/tickets/open/` from
