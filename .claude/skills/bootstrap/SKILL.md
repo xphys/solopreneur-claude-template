@@ -22,7 +22,8 @@ Ask in batches (use AskUserQuestion where options are enumerable), don't guess:
 
 1. **Identity:** platform name, slug, one-line pitch, primary domain, GitHub org.
 2. **Apps:** which of backend/frontend/backoffice/mobile exist (add/remove freely), each
-   repo's URL, trunk, and production branch. Do the repos already exist, or create them?
+   repo's URL and branches (trunk / uat / production; default `main` / `deploy/uat` /
+   `deploy/prod`). Do the repos already exist, or create them?
 3. **AWS:** profile name, region, notification email (must be a notifications inbox, not the
    owner's personal email).
 4. **Stack facts:** auth provider, DB + schema-change policy (migrations vs manual DDL),

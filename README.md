@@ -47,8 +47,9 @@ edit `apps.yaml`, then run `./setup.sh`.
 - **Docs describe only what code can't tell** — wiring, schema, conventions, gotchas, decisions.
 - **Chat-first, ticket-recorded.** No ceremony to start work; full traceability after it.
 - **Infrastructure is code.** Nothing exists in the cloud unless it's in `infra/iac/`.
-- **Trunk-based.** Work lands on each app's trunk; production branches are deploy-only and
-  promoted manually by the owner.
+- **Short-lived branches, clean history.** Development happens on `features/<slug>`,
+  squash-merged to `main` and deleted immediately. `deploy/uat` and `deploy/prod` are
+  protected, deploy-only, and promoted manually by the owner (`main` → uat → prod).
 - **Manager–worker execution.** The session model is the manager — it plans, reviews, and
   holds the quality bar; workers one tier below implement from self-contained specs; the loop
   repeats until acceptance criteria pass. Swap cost tiers by changing the session model

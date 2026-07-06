@@ -64,13 +64,17 @@ never commit. Trivial fixes skip the loop; mechanical bulk work uses the cheapes
 
 ## Golden rules
 
-1. **Work on each app's trunk; never push to a production branch.** Trunks and production
-   branches are declared per app in [apps.yaml](apps.yaml) — production branches auto-deploy on
-   push; only the owner promotes trunk → production. Default is **no feature branch** (commit
-   straight to trunk, one work-item = one commit so it reverts as a unit); create a short-lived
-   `feature/*` only when the owner confirms (multi-day work, throwaway experiments, or changes
-   that would leave trunk broken). Delete `feature/*` immediately after merge. Roll back with
-   `git revert`, never `git reset --hard` on pushed trunk.
+1. **Branch model: `features/*` → `main` → `deploy/uat` → `deploy/prod`.** Branches per app
+   are declared in [apps.yaml](apps.yaml).
+   - **Develop on `features/<slug>`** off `main` (one branch per work-item; trivial fixes —
+     typos, doc-only — may land on `main` directly). When done, **squash-merge back to
+     `main`** (one work-item = one commit on `main`, revertable as a unit) and **delete the
+     branch immediately** — local and remote. Never leave merged `features/*` around; if
+     `/status` finds stale ones, that's a bug to clean up.
+   - **Never push to a deployment branch** (`deploy/uat`, `deploy/prod` — both protected;
+     pushing auto-deploys). Only the owner promotes: `main` → `deploy/uat` for verification,
+     then `deploy/uat` → `deploy/prod` to release.
+   - Roll back `main` with `git revert <commit>`, never `git reset --hard` on a pushed branch.
 2. **Infrastructure is code.** No cloud resource exists unless it is in `infra/iac/`. Manual
    console changes are emergencies only and must be back-ported to IaC (and ticketed) the same
    day. Plan → owner approves → apply.

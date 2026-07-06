@@ -13,9 +13,11 @@ Produce ONE readable screen, worst news first. Gather:
    (`git status --porcelain`), and ahead/behind vs `origin/<trunk>` after a `git fetch`.
    Flag: uncommitted work, unpushed commits, a checkout not on trunk, missing clone
    (suggest `./setup.sh`).
-3. **Trunk vs production:** per app, `git log --oneline <production>..<trunk> | wc -l` —
-   commits shipped to trunk but not yet promoted. This is the "ready to release" number.
-4. **Hygiene (mention only if wrong):** leftover `feature/*` branches already merged;
+3. **Promotion pipeline:** per app, `git log --oneline <uat>..<trunk> | wc -l` (on trunk, not
+   yet in UAT) and `git log --oneline <production>..<uat> | wc -l` (in UAT, not yet released).
+   These are the "ready to test" and "ready to release" numbers.
+4. **Hygiene (mention only if wrong):** leftover `features/*` branches already merged into
+   trunk (`git branch --merged <trunk>`) — the model says delete-on-merge, so any hit is debt;
    `{{` placeholders still present; tickets sitting in `In review` for a long time.
 
 Format: a short table for the repos, a bullet list for tickets, one line per warning.

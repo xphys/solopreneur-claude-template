@@ -46,9 +46,11 @@ independently implementable and revertable (one item = one commit). For each ite
 
 ## 2. Dispatch
 
-Spawn one `worker` subagent per item (Agent tool, `subagent_type: worker`, `model` from the
-ladder above — always set it explicitly). Independent items → dispatch in parallel; items
-touching the same repo in conflicting ways → sequential, or use worktree isolation.
+Per item, first create its branch in the target repo: `git -C apps/<name> checkout -b
+features/<ticket-slug>` off up-to-date `main`. Then spawn one `worker` subagent (Agent tool,
+`subagent_type: worker`, `model` from the ladder above — always set it explicitly); the worker
+edits on that checkout and never switches branches. Independent items → dispatch in parallel;
+items touching the same repo → sequential (one checkout), or use worktree isolation.
 Mechanical bulk items (renames, repeated edits) use the bulk tier — same spec bar, cheaper hands.
 
 ## 3. Verify, then review
@@ -71,5 +73,7 @@ planned: stop, revert the working tree if it's a mess, and escalate to the owner
 
 ## 5. Land
 
-Per passing item: commit in the app repo (one item = one commit, ticket id in the message),
-then record via `/ticket`. Multi-item builds get one ticket per coherent item, cross-linked.
+Per passing item, in the app repo: commit on the `features/<slug>` branch (ticket id in the
+message), squash-merge into `main` (one item = one commit on `main`), push `main`, and
+**delete the branch immediately** — local and, if pushed, remote. Then record via `/ticket`.
+Multi-item builds get one ticket per coherent item, cross-linked. Never touch `deploy/*`.

@@ -6,5 +6,6 @@ orchestrator repo (see `.gitignore`) — this file is the only exception.
 
 - To add or remove an app, edit `apps.yaml` (the `/new-app` skill does this properly:
   manifest + codebase doc + clone).
-- Branch model per app (trunk vs production branch) is declared in `apps.yaml`.
-  **Never push to a production branch** — see Golden rule #1 in [`../CLAUDE.md`](../CLAUDE.md).
+- Branch model per app (`features/*` → trunk → `deploy/uat` → `deploy/prod`) is declared in
+  `apps.yaml`. **Never push to a deployment branch** — see Golden rule #1 in
+  [`../CLAUDE.md`](../CLAUDE.md).

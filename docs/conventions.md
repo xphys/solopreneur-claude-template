@@ -33,5 +33,6 @@ exemplar file to copy — never paste long code into this doc.
 
 ## Commits
 
-- One work-item = one commit on trunk (revertable as a unit).
+- One work-item = one `features/<slug>` branch = one squash-merge commit on `main`
+  (revertable as a unit). Delete the branch right after merging.
 - Message: imperative summary line; reference the ticket id (e.g. `2026-07-06-fix-login`).

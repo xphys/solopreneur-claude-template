@@ -3,7 +3,7 @@
 <One paragraph: what this app is, who uses it, where it's deployed.>
 
 - **Stack:** <framework, language, key libraries>
-- **Trunk / production branch:** see [apps.yaml](../../apps.yaml)
+- **Branches (trunk / uat / production):** see [apps.yaml](../../apps.yaml)
 - **Run locally:** <command; where env comes from>
 - **Deploys via:** <mechanism; link to the runbook in ../../infra/runbooks/>
 

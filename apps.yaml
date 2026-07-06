@@ -5,27 +5,33 @@
 # FORMAT IS STRICT (parsed by awk in setup.sh — no nesting beyond this shape):
 #   - name: <folder name under apps/>
 #     repo: <git URL (SSH form; setup.sh can rewrite to HTTPS)>
-#     trunk: <development trunk — work happens here>
-#     production: <deploy-only branch — auto-deploys; owner promotes trunk into it>
+#     trunk: <integration trunk — features/* merge here>
+#     uat: <protected deployment branch — auto-deploys to UAT; promoted from trunk>
+#     production: <protected deployment branch — auto-deploys to prod; promoted from uat>
 #
-# Golden rule #1: never push to a production branch.
+# Branch model: develop on features/<slug> off trunk → merge back to trunk → DELETE the
+# branch immediately. Never push to a deployment branch (deploy/*) — the owner promotes.
 
 - name: backend
   repo: git@github.com:{{GITHUB_ORG}}/{{PLATFORM_SLUG}}-backend.git
   trunk: main
+  uat: deploy/uat
   production: deploy/prod
 
 - name: frontend
   repo: git@github.com:{{GITHUB_ORG}}/{{PLATFORM_SLUG}}-frontend.git
   trunk: main
+  uat: deploy/uat
   production: deploy/prod
 
 - name: backoffice
   repo: git@github.com:{{GITHUB_ORG}}/{{PLATFORM_SLUG}}-backoffice.git
   trunk: main
+  uat: deploy/uat
   production: deploy/prod
 
 - name: mobile
   repo: git@github.com:{{GITHUB_ORG}}/{{PLATFORM_SLUG}}-mobile.git
   trunk: main
+  uat: deploy/uat
   production: deploy/prod

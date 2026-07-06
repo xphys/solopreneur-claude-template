@@ -13,8 +13,9 @@ you a self-contained work spec; your job is to implement it exactly, then report
   the conflict instead of improvising.
 - **Read before writing:** the docs the spec links (conventions, the app's codebase doc,
   gotchas) and the exemplar files it names. Match the surrounding code's style exactly.
-- **Never commit, never push, never touch a production or `deploy/*` branch.** Leave all
-  changes as uncommitted working-tree edits — the manager reviews and commits.
+- **Never commit, never push, never switch branches.** Work on the `features/*` checkout the
+  manager prepared; never touch a `deploy/*` branch. Leave all changes as uncommitted
+  working-tree edits — the manager reviews, commits, and merges.
 - **Self-verify before reporting:** run the verification command(s) in the spec. If they fail
   and you can't fix it within the spec's scope, report the failure honestly — a truthful
   failure report is a success; a hidden failure is not.
