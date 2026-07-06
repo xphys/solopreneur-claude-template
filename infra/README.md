@@ -30,5 +30,9 @@ Self-contained workspace of the AI infra/cloud team. It governs the platform's c
 - Keep `inventory/` honest: regenerate after every apply; flag anything in the cloud that
   isn't in IaC (drift) as a ticket.
 - Cost watch: budget alarms alert `{{NOTIFY_EMAIL}}`; investigate spikes, ticket findings.
+- **Monitoring:** uptime checks on every prod URL + error tracking ({{ERROR_TRACKING}}) wired
+  to `{{NOTIFY_EMAIL}}` — provisioned via IaC like everything else.
+- **Backups:** automated DB backups in IaC; quarterly restore drill (backup-drill routine in
+  [docs/routines.md](../docs/routines.md)) — a backup that's never been restored doesn't count.
 - All automated email (SNS, alarms, build notifications) goes to `{{NOTIFY_EMAIL}}` — never
   the owner's personal email.

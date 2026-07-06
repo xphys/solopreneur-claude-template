@@ -12,6 +12,8 @@ The source of truth for the platform. Read in this order for any task:
 8. [security.md](security.md) — where secrets/env live; what must never enter git.
 9. [decisions/](decisions/README.md) — ADRs: why things are the way they are.
 10. [tickets/](tickets/README.md) — the work log and its lifecycle (single home for ticket rules).
+11. [product/](product/README.md) — roadmap + idea inbox (owner's product thinking).
+12. [routines.md](routines.md) — registry of standing scheduled agents.
 
 Editing rules: keep links relative (`codebases/*` link to code as `../../apps/<app>/...`).
 **Single-home policy** (see CLAUDE.md): knowledge lives in code first, code comments second,

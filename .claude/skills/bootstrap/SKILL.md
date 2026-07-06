@@ -28,7 +28,11 @@ Ask in batches (use AskUserQuestion where options are enumerable), don't guess:
    owner's personal email).
 4. **Stack facts:** auth provider, DB + schema-change policy (migrations vs manual DDL),
    payments, notification channels, hosting/deploy per app, where backend/frontend env lives.
-5. **Testing:** which environment QA may test against; where test accounts live.
+5. **Testing:** which environment QA may test against; where test accounts live; the 3–5
+   critical paths for `tester/smoke.md`.
+6. **Business:** support channels + language (`support/`), recurring costs + jurisdiction
+   (`office/`), error-tracking tool. Offer to enable the routines (`/routines`) once env
+   URLs exist.
 
 If the platform already exists (adopting, not greenfield), prefer reading `apps/*` code to
 asking — interview only for what code can't tell.

@@ -22,8 +22,11 @@ repo. **It contains no application code.** It holds:
 - `tester/` — the **AI QA team's** workspace (black-box testing, opt-in). Start at
   [tester/README.md](tester/README.md).
 - `design/` — the **AI design team's** workspace (mockups, tokens, UX decisions).
-- `growth/` — the **AI growth team's** workspace (copy, SEO, analytics review).
+- `growth/` — the **AI growth team's** workspace (copy, SEO, analytics, changelog).
 - `security/` — the **AI security team's** workspace (audits, dependency & secret hygiene).
+- `support/` — the **AI support team's** workspace (user-report triage → tickets, FAQ, reply drafts).
+- `office/` — the **AI back-office team's** workspace (finance reports, costs, invoices, legal).
+- Standing automation is registered in [docs/routines.md](docs/routines.md) (`/routines` skill).
 
 Team workspaces read `docs/` + `apps/` but keep their artifacts in their own folder; their only
 outward actions are tickets in `docs/tickets/` and owner-approved changes. For normal dev work,

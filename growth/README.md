@@ -24,3 +24,5 @@ Owner-invoked: "review the landing copy", "why did signups drop", "prep the laun
 - `seo/` — keyword targets, page-by-page findings, dated audits.
 - `analytics/` — dated reviews: funnel numbers, what changed, hypotheses, proposed experiments.
 - `launches/` — per-launch checklist and post-mortem.
+- `changelog.md` — user-facing release notes; a new entry per prod promote (written from the
+  shipped tickets — `/promote` step 7).

@@ -38,7 +38,10 @@ edit `apps.yaml`, then run `./setup.sh`.
 | [design/](design/README.md) | AI design team — mockups, tokens, UX decisions |
 | [growth/](growth/README.md) | AI growth team — copy, SEO, analytics |
 | [security/](security/README.md) | AI security team — audits, dependency & secret hygiene |
-| `.claude/skills/` | Workflow skills: `/bootstrap`, `/build`, `/ticket`, `/status`, `/promote`, `/new-app` |
+| [support/](support/README.md) | AI support team — user-report triage, FAQ, reply drafts |
+| [office/](office/README.md) | AI back-office team — finance reports, invoices, legal |
+| [docs/routines.md](docs/routines.md) | Standing scheduled agents (nightly QA, weekly audit/report…) |
+| `.claude/skills/` | Workflow skills: `/bootstrap`, `/build`, `/ticket`, `/status`, `/promote`, `/new-app`, `/routines` |
 | `.claude/agents/` | Subagent roles: `worker` (implementer for the `/build` loop; model set by the ladder) |
 
 ## Principles
