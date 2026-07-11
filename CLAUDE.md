@@ -26,6 +26,9 @@ repo. **It contains no application code.** It holds:
 - `security/` — the **AI security team's** workspace (audits, dependency & secret hygiene).
 - `support/` — the **AI support team's** workspace (user-report triage → tickets, FAQ, reply drafts).
 - `office/` — the **AI back-office team's** workspace (finance reports, costs, invoices, legal).
+- `clickup/` — local ClickUp integration, the owner's **PM-updates channel** (token-pinned to
+  one workspace; never the cloud connector). Start at [clickup/README.md](clickup/README.md);
+  workspace IDs in [clickup/WORKSPACE.md](clickup/WORKSPACE.md).
 - Standing automation is registered in [docs/routines.md](docs/routines.md) (`/routines` skill).
 
 Team workspaces read `docs/` + `apps/` but keep their artifacts in their own folder; their only

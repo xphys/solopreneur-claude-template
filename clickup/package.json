@@ -1,0 +1,13 @@
+{
+  "name": "clickup-mcp-local",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local ClickUp MCP server for Claude Code. Pinned to the last free/MIT release (0.8.5; 0.9+ is a paid license build). Launched via ../.mcp.json; token comes from clickup/.env.",
+  "scripts": {
+    "start": "dotenv -e .env -- clickup-mcp-server"
+  },
+  "dependencies": {
+    "@taazkareem/clickup-mcp-server": "0.8.5",
+    "dotenv-cli": "11.0.0"
+  }
+}

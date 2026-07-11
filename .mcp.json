@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "clickup": {
+      "command": "node",
+      "args": [
+        "clickup/node_modules/dotenv-cli/cli.js",
+        "-e", "clickup/.env",
+        "--",
+        "node",
+        "clickup/node_modules/@taazkareem/clickup-mcp-server/build/index.js"
+      ]
+    }
+  }
+}
