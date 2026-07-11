@@ -28,8 +28,8 @@ the right things are gitignored.
     `clickup/.env`, and `WORKSPACE.md` ships as a fill-in map.
   - **Indexed the folder in CLAUDE.md** (one bullet pointing at `clickup/README.md`,
     per the single-home doc policy — the folder documents itself).
-- **Commits / branches:** not committed yet — changes are in the working tree on `main`
-  (new `clickup/`, new `.mcp.json`, edits to `.gitignore` and `CLAUDE.md`).
+- **Commits / branches:** this repo: `1c728ae` on `main` — clickup/ folder, `.mcp.json`,
+  `.gitignore` + `CLAUDE.md` edits, this ticket.
 - **DB / DDL applied:** none
 - **Infra changed:** none
 - **Docs updated:** CLAUDE.md (repo-layout list), this ticket.
